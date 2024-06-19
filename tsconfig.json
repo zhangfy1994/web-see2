@@ -1,8 +1,8 @@
 {
-  "include": ["global.d.ts", "packages", "types", "test"],
+  "include": ["global.d.ts", "packages", "types", "test", "web-see2-demo"],
   "compilerOptions": {
     "resolveJsonModule": true,
-    "target": "es5",
+    "target": "ES6",
     "module": "esnext",
     "lib": ["dom", "esnext"],
     "importHelpers": true,
@@ -23,7 +23,7 @@
     "baseUrl": "./",
     "paths": {
       "*": ["src/*", "node_modules/*"],
-      "@websee/*": ["packages/*/src"]
+      "@websee2/*": ["packages/*/src"]
     },
     "jsx": "react",
     "esModuleInterop": true

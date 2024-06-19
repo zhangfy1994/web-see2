@@ -1,0 +1,22 @@
+{
+  "name": "@websee2/core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.esm.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "dependencies": {
+    "@websee2/common": "workspace:*",
+    "@websee2/types": "workspace:*",
+    "@websee2/utils": "workspace:*",
+    "ua-parser-js": "^1.0.38"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@types/ua-parser-js": "^0.7.39"
+  }
+}
