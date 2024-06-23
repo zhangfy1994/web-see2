@@ -256,7 +256,7 @@ export default {
       };
     },
     promiseErr() {
-      new Promise((resolve, reject) => {
+      new Promise((resolve) => {
         this.getTableData();
         let person = {};
         person.name.age();

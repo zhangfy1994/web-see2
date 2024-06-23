@@ -152,3 +152,19 @@ export interface RouteHistory {
   from: string;
   to: string;
 }
+
+export interface SdkBase {
+  transportData: any; // 数据上报
+  breadcrumb: any; // 用户行为
+  options: any; // 公共配置
+  notify: any; // 发布消息
+}
+
+export abstract class BasePlugin {
+  public type: string;
+  constructor(type: string) {
+    this.type = type;
+  }
+
+  abstract core(args: SdkBase): void;
+}

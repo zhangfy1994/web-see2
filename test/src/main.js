@@ -6,7 +6,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 import webSee from '../../packages/core/dist/index.esm';
-// import performance from '../../packages/performance/src';
+import performance from '../../packages/performance/dist/index.esm';
 // import recordscreen from '../../packages/recordscreen/src';
 
 // import webSee from '@websee/core';
@@ -32,7 +32,7 @@ Vue.use(webSee, {
     }
   },
 });
-// webSee.use(performance);
+webSee.use(performance);
 // webSee.use(recordscreen, { recordScreentime: 15 });
 
 Vue.use(ElementUI, { size: 'mini' });
@@ -45,3 +45,11 @@ setTimeout(() => {
     render: (h) => h(App),
   }).$mount('#app');
 }, 2000);
+
+const observer = new PerformanceObserver((list) => {
+  list.getEntries().forEach((entry) => {
+    console.log(entry);
+  });
+});
+
+observer.observe({ type: 'resource', buffered: true });

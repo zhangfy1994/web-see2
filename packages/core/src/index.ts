@@ -26,6 +26,7 @@ function init(options: InitOptions) {
   setupReplace();
 }
 
+// vue 使用
 function install(Vue: { [key: string]: any }, options: InitOptions) {
   if (getFlag(EVENTTYPES.VUE)) return;
   setFlag(EVENTTYPES.VUE, true);
@@ -37,7 +38,22 @@ function install(Vue: { [key: string]: any }, options: InitOptions) {
   init(options);
 }
 
+// react errorhandler
+function errorBundle(err: Error) {
+  HandleEvents.handleError(err);
+}
+
+// 插件use
+function use(plugin: any, options: any) {
+  try {
+    const instance = new plugin(options);
+    instance.core({ transportData });
+  } catch (error) {}
+}
+
 export default {
   init,
   install,
+  errorBundle,
+  use,
 };
