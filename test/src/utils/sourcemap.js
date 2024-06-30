@@ -30,18 +30,23 @@ function loadSourceMap(fileName) {
     file = matchStr(fileName);
   }
   if (!file) return;
-  return new Promise(resolve => {
-    fetch(`http://localhost:8083/getmap?fileName=${file}&env=${env}`).then(response => {
-      if (env == 'development') {
-        resolve(response.text());
-      } else {
-        resolve(response.json());
-      }
-    });
+  return new Promise((resolve) => {
+    fetch(`http://localhost:8083/getmap?fileName=${file}&env=${env}`).then(
+      (response) => {
+        if (env == 'development') {
+          resolve(response.text());
+        } else {
+          resolve(response.json());
+        }
+      },
+    );
   });
 }
 
-export const findCodeBySourceMap = async ({ fileName, line, column }, callback) => {
+export const findCodeBySourceMap = async (
+  { fileName, line, column },
+  callback,
+) => {
   let sourceData = await loadSourceMap(fileName);
   if (!sourceData) return;
   let result, codeList;
@@ -54,7 +59,7 @@ export const findCodeBySourceMap = async ({ fileName, line, column }, callback) 
       column, // 具体的报错列数
       name: null,
     };
-    codeList = sourceData.split('\n').filter(item => {
+    codeList = sourceData.split('\n').filter((item) => {
       if (item.indexOf('<script') != -1 || isStart) {
         isStart = true;
         return item;
@@ -93,8 +98,8 @@ export const findCodeBySourceMap = async ({ fileName, line, column }, callback) 
     // 未找到，将sources路径格式化后重新匹配 /./ 替换成 / 否则解析失败
     // 测试中发现会有路径中带/./的情况，如 webpack://web-see/./src/main.js
     if (index === -1) {
-      let copySources = JSON.parse(JSON.stringify(sources)).map(item =>
-        item.replace(/\/.\//g, '/')
+      let copySources = JSON.parse(JSON.stringify(sources)).map((item) =>
+        item.replace(/\/.\//g, '/'),
       );
       index = copySources.indexOf(result.source);
     }
@@ -110,6 +115,7 @@ export const findCodeBySourceMap = async ({ fileName, line, column }, callback) 
     codeList = code.split('\n');
   }
 
+  console.log('result>>>>>', result, codeList);
   let row = result.line,
     len = codeList.length - 1;
   let start = row - 5 >= 0 ? row - 5 : 0, // 将报错代码显示在中间位置
@@ -121,7 +127,7 @@ export const findCodeBySourceMap = async ({ fileName, line, column }, callback) 
     newLines.push(
       `<div class="code-line ${i + 1 == row ? 'heightlight' : ''}" title="${
         i + 1 == row ? result.source : ''
-      }">${j}. ${repalceAll(codeList[i])}</div>`
+      }">${j}. ${repalceAll(codeList[i])}</div>`,
     );
   }
 

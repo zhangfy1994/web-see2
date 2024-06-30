@@ -183,6 +183,7 @@ export default {
       this.activities = breadcrumb;
     },
     revertCode(row) {
+      console.log('>>>>>>', row);
       findCodeBySourceMap(row, (res) => {
         this.dialogTitle = '查看源码';
         this.fullscreen = false;
