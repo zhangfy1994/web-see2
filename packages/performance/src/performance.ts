@@ -95,8 +95,11 @@ function getINP(fn: (res: any) => void) {
     for (const entry of entries) {
       fn({
         name: 'INP',
-        value: entry.processingStart - entry.startTime,
-        rating: entry.processingStart - entry.startTime > 100 ? 'poor' : 'good',
+        value: (entry as any).processingStart - entry.startTime,
+        rating:
+          (entry as any).processingStart - entry.startTime > 100
+            ? 'poor'
+            : 'good',
       });
     }
   });
@@ -156,11 +159,11 @@ export function getResource(fn: (res: any) => void) {
     const entries = entryList.getEntries();
     const list = entries.filter((entry) => {
       return !['fetch', 'xmlhttprequest', 'beacon'].includes(
-        entry.initiatorType,
+        (entry as any).initiatorType,
       );
     });
     list.forEach((entry) => {
-      entry.cache = isCache(entry);
+      (entry as any).cache = isCache(entry);
     });
     observer.disconnect();
     fn(list);

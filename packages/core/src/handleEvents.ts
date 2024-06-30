@@ -36,7 +36,6 @@ export const HandleEvents = {
       col: columnNumber,
       line: lineNumber,
       message: err.message,
-      stack: err.error.stack,
     };
 
     breadcrumb.push({

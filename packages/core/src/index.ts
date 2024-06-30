@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { InitOptions } from '@websee2/types';
-import { _global, getFlag, setFlag } from './global';
+import { _global, _support, getFlag, setFlag } from './global';
 import { globalOptions, setGlobalOptions } from './options';
 import { breadcrumb } from './breadcrumb';
 import { transportData } from './reportData';
@@ -44,10 +44,10 @@ function errorBundle(err: Error) {
 }
 
 // 插件use
-function use(plugin: any, options: any) {
+function use(plugin: any, option: any) {
   try {
-    const instance = new plugin(options);
-    instance.core({ transportData });
+    const instance = new plugin(option);
+    instance.core({ transportData, options: _support.options });
   } catch (error) {}
 }
 

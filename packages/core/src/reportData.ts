@@ -62,6 +62,13 @@ class TransportData {
   send(data: ReportData) {
     const { beforeDataReport, useImageUpload, dsn } = this;
     if (!dsn) return;
+    if (_support.options.silentRecordScreen) {
+      if (_support.options.recordScreenTypes.includes(data.type)) {
+        // 修改hasError
+        _support.hasError = true;
+        data.recordScreenId = _support.recordScreenId;
+      }
+    }
     let transportData = this.getTransportData(data);
     if (typeof beforeDataReport === 'function') {
       transportData = beforeDataReport(data);
@@ -71,9 +78,9 @@ class TransportData {
     const beaconResult = this.beacon(dsn, transportData);
     if (!beaconResult) {
       if (useImageUpload) {
-        this.imgRequest(this.dsn, data);
+        this.imgRequest(this.dsn, transportData);
       } else {
-        this.xhrRequest(this.dsn, data);
+        this.xhrRequest(this.dsn, transportData);
       }
     }
   }

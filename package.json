@@ -18,6 +18,7 @@
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@types/pako": "^2.0.3",
     "@typescript-eslint/eslint-plugin": "^7.13.0",
     "@typescript-eslint/parser": "^7.13.0",
     "commitizen": "^4.3.0",
@@ -46,6 +47,8 @@
     }
   },
   "dependencies": {
-    "error-stack-parser": "^2.1.4"
+    "error-stack-parser": "^2.1.4",
+    "js-base64": "^3.7.7",
+    "pako": "^2.1.0"
   }
 }
