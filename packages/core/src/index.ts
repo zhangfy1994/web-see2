@@ -48,7 +48,9 @@ function use(plugin: any, option: any) {
   try {
     const instance = new plugin(option);
     instance.core({ transportData, options: _support.options });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export default {
